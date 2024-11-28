@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Welcome, Admin</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student Number</th>
+                    <th>Fee Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="transactions-table">
+                <!-- Data loaded dynamically -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        fetch('php/admin_panel.php')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('transactions-table');
+                data.forEach(row => {
+                    table.innerHTML += `
+                        <tr>
+                            <td>${row.full_name}</td>
+                            <td>${row.student_number}</td>
+                            <td>${row.fee_name}</td>
+                            <td>${row.amount}</td>
+                            <td>${row.status}</td>
+                        </tr>`;
+                });
+            });
+    </script>
+</body>
+</html>

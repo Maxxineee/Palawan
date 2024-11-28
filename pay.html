@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Fees - JCF Fees System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #FFEB3B, #FFFFFF, #FF9800);
+            margin: 0;
+            padding: 0;
+        }
+        .pay-container, .receipt-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+        .pay-container h1, .receipt-container h1 {
+            color: #FF9800;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #FF9800;
+            color: white;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #FFCC00;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FFEB3B;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #FFD54F;
+        }
+        .receipt {
+            text-align: left;
+            margin-top: 20px;
+            font-size: 18px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #receipt-actions {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        const pendingFees = [
+            { fee_name: "CSG Fee", amount: 150, status: "Unpaid" },
+            { fee_name: "USG Fee", amount: 120, status: "Unpaid" },
+            { fee_name: "Maintenance Fee", amount: 100, status: "Unpaid" }
+        ];
+        let selectedFees = [];
+
+        // Populate the table with fees
+        document.addEventListener("DOMContentLoaded", () => {
+            const table = document.getElementById('fees-table');
+            pendingFees.forEach(fee => {
+                table.innerHTML += `
+                    <tr>
+                        <td><input type="checkbox" value="${fee.fee_name}" data-amount="${fee.amount}" class="fee-checkbox"></td>
+                        <td>${fee.fee_name}</td>
+                        <td>PHP ${fee.amount}</td>
+                        <td>${fee.status}</td>
+                    </tr>`;
+            });
+        });
+
+        // Handle fee selection and payment
+        function paySelectedFees() {
+            const checkboxes = document.querySelectorAll('.fee-checkbox:checked');
+            if (checkboxes.length === 0) {
+                alert("Please select at least one fee to pay.");
+                return;
+            }
+
+            selectedFees = Array.from(checkboxes).map(checkbox => {
+                const feeName = checkbox.value;
+                const amount = parseFloat(checkbox.dataset.amount);
+                return { feeName, amount };
+            });
+
+            const totalAmount = selectedFees.reduce((total, fee) => total + fee.amount, 0);
+            if (confirm(`You are about to pay PHP ${totalAmount}. Proceed?`)) {
+                selectedFees.forEach(fee => {
+                    const pendingFee = pendingFees.find(f => f.fee_name === fee.feeName);
+                    pendingFee.status = "paid";
+                });
+                displayReceipt();
+            }
+        }
+
+        // Display receipt after payment
+        function displayReceipt() {
+            document.querySelector('.pay-container').style.display = 'none';
+            const receiptContainer = document.querySelector('.receipt-container');
+            receiptContainer.style.display = 'block';
+
+            const receipt = document.getElementById('receipt');
+            receipt.innerHTML = `
+                <h2>Payment Receipt</h2>
+                <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+                <p><strong>Status:</strong> Paid</p>
+                <hr>
+                ${selectedFees.map(fee => `
+                    <p><strong>${fee.feeName}:</strong> PHP ${fee.amount}</p>
+                `).join('')}
+                <hr>
+                <p><strong>Total Paid:</strong> PHP ${selectedFees.reduce((total, fee) => total + fee.amount, 0)}</p>
+            `;
+        }
+
+        // Save receipt as an image
+        function saveReceipt() {
+            const receiptElement = document.querySelector('.receipt');
+            html2canvas(receiptElement).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'receipt.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <!-- Payment Section -->
+    <div class="pay-container">
+        <h1>Pay Your Fees</h1>
+        <p>Select the fees you want to pay and proceed.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Fee Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="fees-table">
+                <!-- Fees will be dynamically populated -->
+            </tbody>
+        </table>
+        <button onclick="paySelectedFees()">Pay Selected Fees</button>
+    </div>
+
+    <!-- Receipt Section -->
+    <div class="receipt-container" style="display: none;">
+        <h1>Thank You for Your Payment!</h1>
+        <div id="receipt" class="receipt">
+            <!-- Receipt details will be inserted here -->
+        </div>
+        <div id="receipt-actions">
+            <button onclick="saveReceipt()">Save Receipt</button>
+            <a href="home.html">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

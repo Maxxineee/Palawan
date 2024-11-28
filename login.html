@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - JCF Fees System</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #FFEB3B, #FF9800); /* Yellow gradient */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .login-container {
+            background-color: #FFF9C4; /* Light yellow background */
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #FF9800;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF9800;
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF5722; /* Darker orange on hover */
+        }
+
+        .signup-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #FF9800;
+            text-decoration: none;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Welcome Back, Ka-Pinansyalista!</h1>
+        <p>Please enter your details</p>
+        <form action="home.html" method="get">
+            <label for="email">Username or Corporate Email:</label>
+            <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            
+            <button type="submit">Log in</button>
+        </form>
+        <a href="signup.html" class="signup-link">Don't have an account? Sign up here</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #FFEB3B, #FFFFFF, #FF9800);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #FFCC00;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #000000;
+        }
+        .header img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .profile-content {
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .profile-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .profile-content p {
+            font-size: 18px;
+            color: #555;
+        }
+        .profile-content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .profile-content ul li {
+            font-size: 16px;
+            color: #555;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FFCC00;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .back-button:hover {
+            background-color: #FF9800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img src="img/logo.png" alt="Logo">
+        <h1>Student Profile</h1>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="profile-content">
+        <h2>Student Details</h2>
+        <p><strong>Name:</strong> <span id="student-name">[Student Name]</span></p>
+        <p><strong>Year Level:</strong> <span id="student-year-level">[Year Level]</span></p>
+        <p><strong>Course:</strong> <span id="student-course">Bachelor of Financial Management</span></p>
+        <p><strong>Student ID:</strong> <span id="student-id">[Student ID]</span></p>
+        <p><strong>Email:</strong> <span id="student-email">[Email]</span></p>
+
+        <h3>Transaction History</h3>
+        <ul id="transaction-list">
+            <!-- Transaction list will be dynamically populated -->
+            <li>[Date] - Payment of PHP [Amount]</li>
+            <li>[Date] - Payment of PHP [Amount]</li>
+        </ul>
+
+        <!-- Back Button -->
+        <a href="home.html" class="back-button">Back to Main Menu</a>
+    </div>
+
+    <script>
+        // This script will load the stored data from localStorage and populate the profile page
+        window.onload = function() {
+            // Retrieve data from localStorage
+            const name = localStorage.getItem('name');
+            const yearLevel = localStorage.getItem('yearLevel');
+            const course = localStorage.getItem('course');
+            const studentNumber = localStorage.getItem('studentNumber');
+            const email = localStorage.getItem('email');
+
+            // Display data in the profile
+            document.getElementById('student-name').textContent = name || 'Not Available';
+            document.getElementById('student-year-level').textContent = yearLevel || 'Not Available';
+            document.getElementById('student-course').textContent = course || 'Not Available';
+            document.getElementById('student-id').textContent = studentNumber || 'Not Available';
+            document.getElementById('student-email').textContent = email || 'Not Available';
+
+            // Example: Transaction History (You can add dynamic transactions or leave it as is)
+            const transactionList = document.getElementById('transaction-list');
+            const transactions = [
+                { date: '2024-11-15', amount: '500.00' },
+                { date: '2024-11-10', amount: '300.00' },
+                // Add more transactions as needed
+            ];
+
+            // Loop through the transactions and display them
+            transactions.forEach(transaction => {
+                const li = document.createElement('li');
+                li.textContent = `${transaction.date} - Payment of PHP ${transaction.amount}`;
+                transactionList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

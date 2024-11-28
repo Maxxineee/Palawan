@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fees and Clearance System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJf+QF6J6Q7DA6eD8R5P4E6jeWTkz9q24JZfiyjR0/gIT0z5P6NYTjQ9cm3" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #FFEB3B, #FFFFFF, #FF9800); /* Yellow gradient */
+        }
+        /* Header Styling */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #FFCC00; /* Yellow background */
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #000000;
+        }
+        .header img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .header h1 {
+            font-size: 40px;
+            margin: 0;
+        }
+        /* Layout for Content */
+        .main-container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        /* Content Section */
+        .content-section {
+            width: 100%;
+            max-width: 800px; /* Set a max-width for the content */
+            text-align: center;
+            color: #333;
+        }
+        .greeting {
+            font-size: 36px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .transparent-box {
+            background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 0 auto;
+            max-width: 600px; /* Constrained width for better readability */
+        }
+        .transparent-box p {
+            font-size: 20px; /* Font size for the instruction text */
+            color: #020202;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #FFEB3B;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #FF9800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <img src="img/logo.png" alt="Logo" style="height: 100px; margin-right: 0px;"> <!-- Replace with your actual logo -->
+        <h1>Fees and Clearance System</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="content-section">
+            <!-- Greeting Message -->
+            <div class="greeting">
+                <p>Welcome Back, Ka-Pinansyalista!</p>
+            </div>
+
+            <!-- Transparent Box with Fee Information -->
+            <div class="transparent-box">
+                <p>If you wish to check or settle your pending balance, please log in to your account. If you do not have an account yet, kindly sign up first to access your fee details.</p>
+                <!-- Buttons for Sign Up and Log In -->
+                <a href="login.html" class="btn" id="loginBtn">Log In</a>
+                <a href="signup.html" class="btn">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybpyZfDhaQ4fOdFy2xk9I4iGphcZDA1nFzR8jEw9rR1vO5dD6N" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0rzSZXuPHq4fugw+6iPb5l7loWmwldn3tD06ksfBhBF5z38e" crossorigin="anonymous"></script>
+</body>
+</html>

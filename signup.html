@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - JCF Fees System</title>
+    <style>
+        /* Add your existing styles here */
+    </style>
+    <script>
+        function generateEmail() {
+            const studentNumber = document.getElementById('student-number').value;
+            const emailField = document.getElementById('email');
+            if (studentNumber) {
+                emailField.value = studentNumber + "@psu.palawan.edu.ph";
+            }
+        }
+
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('password-error');
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // At least 1 uppercase and 1 number
+            if (!passwordRegex.test(password)) {
+                errorMessage.textContent = 'Password must contain at least one uppercase letter and one number.';
+                return false;
+            } else {
+                errorMessage.textContent = '';
+                return true;
+            }
+        }
+
+        function storeUserData(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const fullName = document.getElementById('name').value;
+            const yearLevel = document.getElementById('year-level').value;
+            const course = document.getElementById('course').value;
+            const studentNumber = document.getElementById('student-number').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Store data in localStorage
+            localStorage.setItem('fullName', fullName);
+            localStorage.setItem('yearLevel', yearLevel);
+            localStorage.setItem('course', course);
+            localStorage.setItem('studentNumber', studentNumber);
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+
+            // Redirect to login page or home page
+            window.location.href = 'login.html'; // You can change this to home.html if you want to show the greeting right after sign up
+        }
+    </script>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <p>Create an account to get started!</p>
+        <form onsubmit="storeUserData(event)">
+            <!-- Name Input -->
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <!-- Year Level Input -->
+            <label for="year-level">Year Level:</label>
+            <input type="text" id="year-level" name="year-level" placeholder="Enter your year level" required>
+
+            <!-- Course Input -->
+            <label for="course">Course:</label>
+            <input type="text" id="course" name="course" placeholder="Enter your course" required>
+
+            <!-- Student Number Input -->
+            <label for="student-number">Student Number:</label>
+            <input type="text" id="student-number" name="student-number" placeholder="Enter your student number" required oninput="generateEmail()">
+
+            <!-- Generated Email Input -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="example@psu.palawan.edu.ph" readonly required>
+
+            <!-- Password Input -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+            <!-- Password Validation Message -->
+            <div id="password-error" class="error-message"></div>
+            <div class="instructions">Password must contain at least 8 characters, one uppercase letter, and one number.</div>
+
+            <!-- Sign Up Button -->
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
